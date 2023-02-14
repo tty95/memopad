@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
 
 class ForgotPasswordController extends Controller
 {
@@ -29,4 +30,16 @@ class ForgotPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+        protected function sendResetLinkFailedResponse(Request $request, $response)
+        {
+                // もともとはこの処理
+                //return back()
+                //        ->withInput($request->only('email'))
+                //        ->withErrors(['email' => trans($response)]);
+                // レスポンスを成功したときと同様の処理に書き換える。
+                $response = 'passwords.sent';
+                // 成功時と同じようにバリデーションエラーは出さないで戻す
+                return back()->with('status', trans($response));
+        }
 }
