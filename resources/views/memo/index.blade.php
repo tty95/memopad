@@ -11,13 +11,6 @@ function select() {
 }
 </script>
 
-<div class="container">
-<div class="row">
-<div class="col-md-8 col-md-offset-2">
-<div class="panel panel-default">
-<div class="panel-heading">メモ一覧</div>
-<div class="panel-body">
-
 @if (session('success_message'))
 <div class="alert alert-success text-center">
 {{ session('success_message') }}
@@ -28,11 +21,18 @@ function select() {
 </div>
 @endif
 
+<div class="container">
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+<div class="panel panel-default">
+<div class="panel-heading">メモ一覧</div>
+<div class="panel-body">
 
 <div class="card" style="width: 100%;">
 <div class="card-header">
 <div align="right">
-<a href="" class="submit">メモを追加</a>
+<button class="btn btn-success" onclick="location.href='{{ route('memo.add') }}'">メモを追加</button>
+</div>
 </div>
 </div>
 <table class="table">
