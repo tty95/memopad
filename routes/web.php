@@ -11,10 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+    // return view('welcome');
+// });
 
 Auth::routes();
+
+///userログイン前
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('login.index');
+
+Route::get('/memopad', function() {
+        return view("memo.index");
+})->name('memopad.index');
 
 Route::get('/home', 'HomeController@index')->name('home');
