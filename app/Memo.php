@@ -18,4 +18,13 @@ class Memo extends Model
                 }
                 return false;
         }
+
+        public function get($memo_id)
+        {
+                $memo = $this->find($memo_id);
+                if ($memo) {
+                        return $memo;
+                }
+                return false;
+        }
 }
