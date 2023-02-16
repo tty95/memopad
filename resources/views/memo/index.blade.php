@@ -36,9 +36,11 @@ function select() {
 </div>
 </div>
 <table class="table">
+@if (0 < $memos->count())
+@foreach ($memos as $memo)
 <tbody>
 <tr>
-<td><a href="">タイトル</a></td>
+<td><a href="">{{ $memo->title }}</a></td>
 <td>
 <button class="btn btn-primary">編集</button>
 </td>
@@ -46,8 +48,12 @@ function select() {
 <button class="btn btn-danger" onclick="return select()">削除</button>
 </td>
 </tr>
+@endforeach
 </tbody>
 </table>
+@else
+<div align=center>メモがありません</div>
+@endif
 </div>
 
 </div>

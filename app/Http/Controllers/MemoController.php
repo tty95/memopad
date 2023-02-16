@@ -17,7 +17,9 @@ class MemoController extends Controller
 
         public function index()
         {
-                return view('memo.index');
+                $auth_id = Auth::id();
+                $memos = $this->memo->where('user_id', $auth_id)->get();
+                return view('memo.index', compact('memos'));
         }
 
         public function add()
