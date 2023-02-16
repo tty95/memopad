@@ -25,7 +25,7 @@ function select() {
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
 <div class="panel panel-default">
-<div class="panel-heading">メモ一覧</div>
+<div class="panel-heading" align="center">メモ一覧</div>
 <div class="panel-body">
 
 <div class="card" style="width: 100%;">
@@ -45,7 +45,11 @@ function select() {
 </div>
 </td>
 <td>
-<button class="btn btn-danger" onclick="return select()">削除</button>
+<form class="form-horizontal" method="POST" action="{{ route('memo.delete') }}">
+{{ csrf_field() }}
+<input type="hidden" name="memo_id" value="{{ $memo->id }}">
+<button class="btn btn-danger" onclick="return select()" type="submit">削除</button>
+</form>
 </td>
 </tr>
 @endforeach

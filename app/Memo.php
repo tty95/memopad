@@ -36,10 +36,20 @@ class Memo extends Model
                         $memo->title = $request->input('title');
                         $memo->content = $request->input('content');
                         if ($memo->save()) {
-				                return 'a';
+				                return true;
                         }
-				        return 'b';
                 }
-		        return 'c';
+		        return false;
+        }
+
+        public function memoDelete($request)
+        {
+                $memo_id = $request->input('memo_id');
+                $memo = $this->find($memo_id);
+                if ($memo) {
+                        $memo->forceDelete();
+                        return true;
+                }
+                return false;
         }
 }
