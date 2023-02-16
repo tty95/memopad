@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::post('/memopad/add', 'MemoController@memoInsert')->name('memo.insert');
         Route::get('/memopad/detail/{id}', 'MemoController@detail')->name('memo.detail');
         Route::post('/memopad/detail', 'MemoController@edit')->name('memo.edit');
+        Route::post('/memopad', 'MemoController@delete')->name('memo.delete'); 
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

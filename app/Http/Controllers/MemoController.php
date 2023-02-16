@@ -48,16 +48,18 @@ class MemoController extends Controller
 
         public function edit(MemoRequest $request)
         {
-                switch($this->memo->memoUpdate($request)) {
-                        case 'a':
-                                return redirect('/memopad')->with('success_message', '編集しました！');
-                                break;
-                        case 'b':
-                                return redirect('/memopad')->with('message', '編集できませんでした。');
-                                break;
-                        case 'c':
-                                return redirect('/memopad')->with('message', '編集できませんでした。存在しないメモです。'); 
-                                break;
-                }   
+                if ($this->memo->memoUpdate($request)) {
+                        return redirect('/memopad')->with('success_message', '編集しました！');
+                }
+                return redirect('/memopad')->with('message', '編集できませんでした。');
+                   
+        }
+
+        public function delete(Request $request)
+        {
+                if ($this->memo->memoDelete($request)) {
+                        return redirect('/memopad')->with('success_message', 'メモを削除しました。');
+                }
+                return redirect('/memopad')->with('message', 'メモを削除できませんでした。');
         }
 }
