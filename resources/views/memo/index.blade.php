@@ -40,7 +40,7 @@ function select() {
 @foreach ($memos as $memo)
 <tbody>
 <tr>
-<td><a href="">{{ $memo->title }}</a></td>
+<td><a href="{{ route('memo.detail', $memo->id) }}">{{ $memo->title }}</a></td>
 <td>
 <button class="btn btn-primary">編集</button>
 </td>

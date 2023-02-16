@@ -22,6 +22,15 @@ class MemoController extends Controller
                 return view('memo.index', compact('memos'));
         }
 
+        public function detail($memo_id)
+        {
+                $result = $this->memo->get($memo_id);
+                if ($result) {
+                        return view('memo.detail', compact('result'));
+                }
+                return redirect('/memopad')->with('message', '存在しないメモです');
+        }
+
         public function add()
         {
                 return view('memo.add');
@@ -32,8 +41,8 @@ class MemoController extends Controller
                 $user_id = Auth::id();
                 if ($this->memo->insert($user_id, $request)) {
                         return redirect('/memopad')->with('success_message', '新規メモを追加しました');
-                } else {
-                        return redirect('memopad')->with('message', 'メモを追加できませんでした');
                 }
+                return redirect('/memopad')->with('message', 'メモを追加できませんでした');
+                
         }
 }
