@@ -27,4 +27,19 @@ class Memo extends Model
                 }
                 return false;
         }
+
+        public function memoUpdate($request)
+        {
+                $memo_id = $request->input('id');
+                $memo = $this->find($memo_id);    
+                if($memo) {
+                        $memo->title = $request->input('title');
+                        $memo->content = $request->input('content');
+                        if ($memo->save()) {
+				                return 'a';
+                        }
+				        return 'b';
+                }
+		        return 'c';
+        }
 }

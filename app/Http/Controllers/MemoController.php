@@ -28,7 +28,7 @@ class MemoController extends Controller
                 if ($result) {
                         return view('memo.detail', compact('result'));
                 }
-                return redirect('/memopad')->with('message', '存在しないメモです');
+                return redirect('/memopad')->with('message', '存在しないメモです。');
         }
 
         public function add()
@@ -40,9 +40,24 @@ class MemoController extends Controller
         {
                 $user_id = Auth::id();
                 if ($this->memo->insert($user_id, $request)) {
-                        return redirect('/memopad')->with('success_message', '新規メモを追加しました');
+                        return redirect('/memopad')->with('success_message', '新規メモを追加しました！');
                 }
-                return redirect('/memopad')->with('message', 'メモを追加できませんでした');
+                return redirect('/memopad')->with('message', 'メモを追加できませんでした。');
                 
+        }
+
+        public function edit(MemoRequest $request)
+        {
+                switch($this->memo->memoUpdate($request)) {
+                        case 'a':
+                                return redirect('/memopad')->with('success_message', '編集しました！');
+                                break;
+                        case 'b':
+                                return redirect('/memopad')->with('message', '編集できませんでした。');
+                                break;
+                        case 'c':
+                                return redirect('/memopad')->with('message', '編集できませんでした。存在しないメモです。'); 
+                                break;
+                }   
         }
 }
