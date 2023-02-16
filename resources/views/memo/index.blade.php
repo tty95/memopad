@@ -42,7 +42,7 @@ function select() {
 <tr>
 <td><a href="{{ route('memo.detail', $memo->id) }}">{{ $memo->title }}</a></td>
 <td>
-<button class="btn btn-primary">編集</button>
+</div>
 </td>
 <td>
 <button class="btn btn-danger" onclick="return select()">削除</button>
