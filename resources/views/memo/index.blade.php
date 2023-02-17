@@ -24,27 +24,23 @@ function select() {
 <div class="container">
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
-<div class="panel panel-default">
-<div class="panel-heading" align="center">メモ一覧</div>
-<div class="panel-body">
-
-<div class="card" style="width: 100%;">
-<div class="card-header">
-<div align="right">
+<div class="panel panel-warning">
+<div class="panel-heading text-center">メモ一覧
+<div class="text-right">
 <button class="btn btn-success" onclick="location.href='{{ route('memo.add') }}'">メモを追加</button>
 </div>
 </div>
-</div>
+
 <table class="table">
 @if (0 < $memos->count())
 @foreach ($memos as $memo)
 <tbody>
 <tr>
-<td><a href="{{ route('memo.detail', $memo->id) }}">{{ $memo->title }}</a></td>
+<td align="left"><a href="{{ route('memo.detail', $memo->id) }}">{{ $memo->title }}</a></td>
 <td>
 </div>
 </td>
-<td>
+<td align="right">
 <form class="form-horizontal" method="POST" action="{{ route('memo.delete') }}">
 {{ csrf_field() }}
 <input type="hidden" name="memo_id" value="{{ $memo->id }}">
@@ -56,11 +52,10 @@ function select() {
 </tbody>
 </table>
 @else
-<div align=center>メモがありません</div>
+<div align="center">メモがありません</div>
 @endif
 </div>
 
-</div>
 </div>
 </div>
 </div>
