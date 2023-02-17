@@ -21,8 +21,17 @@ function select() {
 </div>
 @endif
 
-<div class="container">
+<div class="container-fluid">
 <div class="row">
+<div class="col-sm-4" style="margin-left:180px; margin-bottom:20px;">
+<form class="form-inline" action="{{ route('memo.index') }}">
+<div class="form-group">
+<input type="text" name="keyword" class="form-control" placeholder="キーワード">
+</div>
+<input type="submit" value="検索" class="btn btn-info">
+</form>
+</div>
+
 <div class="col-md-8 col-md-offset-2">
 <div class="panel panel-warning">
 <div class="panel-heading text-center">メモ一覧
@@ -36,11 +45,11 @@ function select() {
 @foreach ($memos as $memo)
 <tbody>
 <tr>
-<td align="left"><a href="{{ route('memo.detail', $memo->id) }}">{{ $memo->title }}</a></td>
+<td class="text-left"><a href="{{ route('memo.detail', $memo->id) }}">{{ $memo->title }}</a></td>
 <td>
 </div>
 </td>
-<td align="right">
+<td class="text-right">
 <form class="form-horizontal" method="POST" action="{{ route('memo.delete') }}">
 {{ csrf_field() }}
 <input type="hidden" name="memo_id" value="{{ $memo->id }}">
@@ -51,8 +60,13 @@ function select() {
 @endforeach
 </tbody>
 </table>
+<div class="col-sm-8" style="text-align:right;">
+<div class="paginate">
+{{ $memos->links() }}
+</div>
+</div>
 @else
-<div align="center">メモがありません</div>
+<div class="text-center"><font size="4">メモがありません</font></div>
 @endif
 </div>
 
