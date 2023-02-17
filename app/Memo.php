@@ -7,6 +7,17 @@ use Illuminate\Support\Facades\Auth;
 
 class Memo extends Model
 {
+
+        public function memoSearch($keyword, $auth_id)
+        {
+                $search = $this->where('user_id', $auth_id)
+                        ->where(function($query) use ($keyword){
+                                $query->where('title', 'like', '%' . $keyword . '%')
+                                        ->orWhere('content', 'like', '%' . $keyword . '%');
+                        });
+                $result = $search->orderBy('created_at', 'desc')->paginate(10);
+                return $result;
+        }
         public function insert($user_id, $request)
         {
                 $insert = new Memo;

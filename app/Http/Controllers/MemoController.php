@@ -15,10 +15,16 @@ class MemoController extends Controller
                 $this->memo = $memo;
         }
 
-        public function index()
+        public function index(Request $request)
         {
                 $auth_id = Auth::id();
-                $memos = $this->memo->where('user_id', $auth_id)->get();
+                if ($request->has('keyword')) {
+                        $keyword = $request->input('keyword');
+                        $memos = $this->memo->memoSearch($keyword, $auth_id);
+                } else {
+                        $result = $this->memo->where('user_id', $auth_id);
+                        $memos = $result->orderBy('created_at', 'desc')->paginate(10);
+                }
                 return view('memo.index', compact('memos'));
         }
 
