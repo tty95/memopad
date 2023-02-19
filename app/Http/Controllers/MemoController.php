@@ -28,15 +28,6 @@ class MemoController extends Controller
                 return view('memo.index', compact('memos'));
         }
 
-        public function detail($memo_id)
-        {
-                $result = $this->memo->get($memo_id);
-                if ($result) {
-                        return view('memo.detail', compact('result'));
-                }
-                return redirect('/memopad')->with('message', '存在しないメモです。');
-        }
-
         public function add()
         {
                 return view('memo.add');
@@ -52,7 +43,16 @@ class MemoController extends Controller
                 
         }
 
-        public function edit(MemoRequest $request)
+        public function edit($memo_id)
+        {
+                $result = $this->memo->get($memo_id);
+                if ($result) {
+                        return view('memo.edit', compact('result'));
+                }
+                return redirect('/memopad')->with('message', '存在しないメモです。');
+        }
+
+        public function update(MemoRequest $request)
         {
                 if ($this->memo->memoUpdate($request)) {
                         return redirect('/memopad')->with('success_message', '編集しました！');
