@@ -5,7 +5,7 @@
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
 <div class="panel panel-warning">
-<div align=center class="panel-heading">新規メモ追加ページ</div>
+<div class="panel-heading text-center">新規メモ追加ページ</div>
 <div class="panel-body">
 
 @if (count($errors) > 0)
@@ -29,7 +29,7 @@
 <div class="form-group">
 <label for="content" class="col-md-4 control-label">メモ内容</label>
 <div class="col-md-6">
-<textarea id="content" type="text" rows="3" class="form-control" name="content" required autofocus>{{ old('content') }}</textarea>
+<textarea id="content" type="text" rows="10" class="form-control" name="content" required autofocus>{{ old('content') }}</textarea>
 </div>
 </div>
 <div class="form-group">

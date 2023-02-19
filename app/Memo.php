@@ -34,7 +34,9 @@ class Memo extends Model
         {
                 $memo = $this->find($memo_id);
                 if ($memo) {
-                        return $memo;
+                        if ($memo->user_id == Auth::id()) {
+                                return $memo;
+                        }
                 }
                 return false;
         }
@@ -44,12 +46,12 @@ class Memo extends Model
                 $memo_id = $request->input('id');
                 $memo = $this->find($memo_id);    
                 if($memo) {
-                        $memo->title = $request->input('title');
-                        $memo->content = $request->input('content');
-                        if ($memo->save()) {
-				                return true;
+                                $memo->title = $request->input('title');
+                                $memo->content = $request->input('content');
+                                if ($memo->save()) {
+				                        return true;
+                                }
                         }
-                }
 		        return false;
         }
 
