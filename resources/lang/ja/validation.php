@@ -42,7 +42,7 @@ return [
 	'digits_between'       => ':attribute は :min ～ :max 桁のみ有効です',
 	'dimensions'           => ':attribute ルールに合致する画像サイズのみ有効です',
 	'distinct'             => ':attribute に重複している値があります',
-	'email'                => ':attribute メールアドレスの書式のみ有効です',
+	'email'                => '正しい:attribute の書式のみ有効です',
 	'exists'               => ':attribute 無効な値です',
 	'file'                 => ':attribute アップロード出来ないファイルです',
 	'filled'               => ':attribute 値を入力してください',
@@ -88,7 +88,7 @@ return [
 	],
 	'string'               => ':attribute は文字列のみ有効です',
 	'timezone'             => ':attribute 正しいタイムゾーンのみ有効です',
-	'unique'               => ':attribute は既に存在します',
+	'unique'               => 'この:attribute は既に存在します',
 	'uploaded'             => ':attribute アップロードに失敗しました',
 	'url'                  => ':attribute は正しいURL書式のみ有効です',
 
@@ -132,6 +132,7 @@ return [
 	'attributes' => [
 		'password' => 'パスワード',
 		'email' => 'メールアドレス',
+		'name' => 'お名前',
 	],
 
 ];

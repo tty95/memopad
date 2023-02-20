@@ -20,8 +20,13 @@ Auth::routes();
 ///userログイン前
 Route::get('/', 'Auth\LoginController@showLoginForm')->name('login.index');
 
-Route::get('/memopad', function() {
-        return view("memo.index");
-})->name('memopad.index');
+Route::group(['middleware' => ['auth']], function() {
+        Route::get('/memopad', 'MemoController@index')->name('memo.index');
+        Route::get('/memopad/add', 'MemoController@add')->name('memo.add');
+        Route::post('/memopad/add', 'MemoController@memoInsert')->name('memo.insert');
+        Route::get('/memopad/edit/{id}', 'MemoController@edit')->name('memo.edit');
+        Route::post('/memopad/edit', 'MemoController@update')->name('memo.update');
+        Route::post('/memopad', 'MemoController@delete')->name('memo.delete'); 
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
