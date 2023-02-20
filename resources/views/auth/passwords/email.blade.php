@@ -5,7 +5,7 @@
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
 <div class="panel panel-default">
-<div class="panel-heading">パスワードリセットメール送信画面</div>
+<div class="panel-heading text-center">パスワードリセットメール送信画面</div>
 
 <div class="panel-body">
 @if (session('status'))
