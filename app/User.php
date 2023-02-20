@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -26,4 +27,25 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getAdminUserFromEmail($email)
+    {
+            return $this->where('email', $email)
+                    ->first();
+    }
+
+    public function createUserByGoogle($gUser)
+    {
+            $user = User::create([
+                'name'     => $gUser->name,
+                'email'    => $gUser->email,
+                'password' => Hash::make(uniqid()),
+            ]);
+            return $user;
+    }
+
+    public function findEmail($gUser)
+    {
+            return $this->where('email', $gUser->email)->first();
+    }
 }

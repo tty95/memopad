@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if (session('message'))
+<div class="alert alert-danger text-center">
+{{ session('message') }}
+</div>
+@endif
+
 <div class="container">
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
@@ -47,6 +54,7 @@
 </div>
 </div>
 </form>
+<a class="btn btn-link" href="{{ route('login.google') }}">googleアカウントを使ってログインする</a>
 </div>
 </div>
 </div>
