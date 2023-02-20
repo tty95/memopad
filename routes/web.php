@@ -19,6 +19,8 @@ Auth::routes();
 
 ///userログイン前
 Route::get('/', 'Auth\LoginController@showLoginForm')->name('login.index');
+Route::get('/auth/redirect', 'GoogleLoginController@getGoogleAuth')->name('login.google');
+Route::get('/login/google/callback', 'GoogleLoginController@authGoogleCallback');
 
 Route::group(['middleware' => ['auth']], function() {
         Route::get('/memopad', 'MemoController@index')->name('memo.index');
