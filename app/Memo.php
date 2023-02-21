@@ -7,10 +7,13 @@ use Illuminate\Support\Facades\Auth;
 
 class Memo extends Model
 {
+        protected $fillable = [
+                'user_id', 'title', 'content',
+        ];
 
         public function memoSearch($keyword, $auth_id)
         {
-                $search = $this->where('user_id', $auth_id)
+                $search = $this->memoFind($auth_id)
                         ->where(function($query) use ($keyword){
                                 $query->where('title', 'like', '%' . $keyword . '%')
                                         ->orWhere('content', 'like', '%' . $keyword . '%');
@@ -18,6 +21,12 @@ class Memo extends Model
                 $result = $search->orderBy('created_at', 'desc')->paginate(10);
                 return $result;
         }
+
+        public function memoFind($auth_id)
+        {
+                return $this->where('user_id', $auth_id);
+        }
+
         public function insert($user_id, $request)
         {
                 $insert = new Memo;
@@ -32,7 +41,7 @@ class Memo extends Model
 
         public function get($memo_id)
         {
-                $memo = $this->find($memo_id);
+                $memo = $this->memoIdFind($memo_id);
                 if ($memo) {
                         if ($memo->user_id == Auth::id()) {
                                 return $memo;
@@ -44,25 +53,32 @@ class Memo extends Model
         public function memoUpdate($request)
         {
                 $memo_id = $request->input('id');
-                $memo = $this->find($memo_id);    
+                $memo = $this->memoIdFind($memo_id);    
                 if($memo) {
-                                $memo->title = $request->input('title');
-                                $memo->content = $request->input('content');
-                                if ($memo->save()) {
-				                        return true;
-                                }
+                        $memo->title = $request->input('title');
+                        $memo->content = $request->input('content');
+                        if ($memo->save()) {
+				return true;
                         }
-		        return false;
+                }
+		return false;
         }
 
         public function memoDelete($request)
         {
                 $memo_id = $request->input('memo_id');
-                $memo = $this->find($memo_id);
+                $memo = $this->memoIdFind($memo_id);
                 if ($memo) {
                         $memo->forceDelete();
                         return true;
                 }
                 return false;
         }
+
+        public function memoIdFind($memo_id)
+        {
+                return $this->find($memo_id);
+        }
+
+
 }

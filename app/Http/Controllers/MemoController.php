@@ -22,7 +22,7 @@ class MemoController extends Controller
                         $keyword = $request->input('keyword');
                         $memos = $this->memo->memoSearch($keyword, $auth_id);
                 } else {
-                        $result = $this->memo->where('user_id', $auth_id);
+                        $result = $this->memo->memoFind($auth_id);
                         $memos = $result->orderBy('created_at', 'desc')->paginate(10);
                 }
                 return view('memo.index', compact('memos'));
