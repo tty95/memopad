@@ -12,13 +12,12 @@ class GoogleLoginController extends Controller
 
         public function __construct(User $user)
         {
-                $this->user = $user; //Usermodelをインスタンス化
+                $this->user = $user;
         }
 
         public function getGoogleAuth()
         {
-                return Socialite::driver('google')
-                        ->redirect();
+                return Socialite::driver('google')->redirect();
         }
 
         public function authGoogleCallback()

@@ -27,8 +27,8 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/memopad/add', 'MemoController@add')->name('memo.add');
         Route::post('/memopad/add', 'MemoController@memoInsert')->name('memo.insert');
         Route::get('/memopad/edit/{id}', 'MemoController@edit')->name('memo.edit');
-        Route::post('/memopad/edit', 'MemoController@update')->name('memo.update');
-        Route::post('/memopad', 'MemoController@delete')->name('memo.delete'); 
+        Route::put('/memopad/edit', 'MemoController@update')->name('memo.update');
+        Route::delete('/memopad', 'MemoController@delete')->name('memo.delete'); 
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
