@@ -87,6 +87,7 @@ function select() {
 <td class="text-right">
 <form class="form-horizontal" method="POST" action="{{ route('memo.delete') }}">
 {{ csrf_field() }}
+{{ method_field('DELETE') }}
 <input type="hidden" name="memo_id" value="{{ $memo->id }}">
 <button class="btn btn-danger" onclick="return select()" type="submit">削除</button>
 </form>

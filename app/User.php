@@ -30,16 +30,15 @@ class User extends Authenticatable
 
     public function getAdminUserFromEmail($email)
     {
-            return $this->where('email', $email)
-                    ->first();
+            return $this->where('email', $email)->first();
     }
 
     public function createUserByGoogle($gUser)
     {
             $user = User::create([
-                'name'     => $gUser->name,
-                'email'    => $gUser->email,
-                'password' => Hash::make(uniqid()),
+                    'name'     => $gUser->name,
+                    'email'    => $gUser->email,
+                    'password' => Hash::make(uniqid()),
             ]);
             return $user;
     }

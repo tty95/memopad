@@ -20,6 +20,7 @@
 
 <form class="form-horizontal" method="POST" action="{{ route('memo.update') }}">
 {{ csrf_field() }}
+{{ method_field('PUT') }}
 <div class="form-group">
 <label for="title" class="col-md-4 control-label">タイトル</label>
 <div class="col-md-6">
