@@ -12,6 +12,8 @@
 
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<link href="{{ asset('css/background.css') }}" rel="stylesheet">
+
 </head>
 <body>
 <div id="app">
@@ -28,8 +30,8 @@
 </button>
 
 <!-- Branding Image -->
-<a class="navbar-brand" href="{{ url('/') }}">
-{{ config('app.name', 'Laravel') }}
+<a class="navbar-brand" href="{{ url('/') }}" style="width:300;font-size:20pt;font-family:Verdana;color:#959500;filter:shadow(color=yellow,direction=270);">
+<em><strong>{{ config('app.name', 'Laravel') }}</strong></em>
 </a>
 </div>
 
@@ -46,9 +48,11 @@
 <li><a href="{{ route('login') }}">ログイン</a></li>
 <li><a href="{{ route('register') }}">新規会員登録</a></li>
 @else
+<li><a style="color:black;">{{ Auth::user()->name }} さんようこそ！</a></li>
 <li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-{{ Auth::user()->name }} <span class="caret"></span>
+メニュー
+<span class="caret"></span>
 </a>
 
 <ul class="dropdown-menu">

@@ -20,41 +20,41 @@ class MemoController extends Controller
                 $auth_id = Auth::id();
                 if ($request->has('keyword')) {
                         $keyword = $request->input('keyword');
-                        $memos = $this->memo->memoSearch($keyword, $auth_id);
+                        $memos = $this->memo->searchMemos($keyword, $auth_id);
                 } else {
-                        $result = $this->memo->memoFind($auth_id);
-                        $memos = $result->orderBy('created_at', 'desc')->paginate(10);
+                        $find_memos = $this->memo->findMemos($auth_id);
+                        $memos = $find_memos->orderBy('created_at', 'desc')->paginate(10);
                 }
                 return view('memo.index', compact('memos'));
         }
 
-        public function add()
+        public function showAddMemoPage()
         {
                 return view('memo.add');
         }
 
-        public function memoInsert(MemoRequest $request)
+        public function add(MemoRequest $request)
         {
                 $user_id = Auth::id();
-                if ($this->memo->insert($user_id, $request)) {
+                if ($this->memo->addMemo($user_id, $request)) {
                         return redirect('/memopad')->with('success_message', '新規メモを追加しました！');
                 }
                 return redirect('/memopad')->with('message', 'メモを追加できませんでした。');
                 
         }
 
-        public function edit($memo_id)
+        public function showEditMemoPage($memo_id)
         {
-                $result = $this->memo->get($memo_id);
-                if ($result) {
-                        return view('memo.edit', compact('result'));
+                $memo = $this->memo->findMemoToBeEdited($memo_id);
+                if ($memo) {
+                        return view('memo.edit', compact('memo'));
                 }
                 return redirect('/memopad')->with('message', '存在しないメモです。');
         }
 
         public function update(MemoRequest $request)
         {
-                if ($this->memo->memoUpdate($request)) {
+                if ($this->memo->updateMemo($request)) {
                         return redirect('/memopad')->with('success_message', '編集しました！');
                 }
                 return redirect('/memopad')->with('message', '編集できませんでした。');
@@ -63,7 +63,7 @@ class MemoController extends Controller
 
         public function delete(Request $request)
         {
-                if ($this->memo->memoDelete($request)) {
+                if ($this->memo->deleteMemo($request)) {
                         return redirect('/memopad')->with('success_message', 'メモを削除しました。');
                 }
                 return redirect('/memopad')->with('message', 'メモを削除できませんでした。');

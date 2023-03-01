@@ -4,7 +4,7 @@
 <div class="container">
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
-<div class="panel panel-default">
+<div class="panel panel-warning">
 <div class="panel-heading text-center">パスワードリセットメール送信画面</div>
 
 <div class="panel-body">
@@ -37,6 +37,7 @@
 </div>
 </div>
 </form>
+<a class="btn btn-link" href="{{ route('login.index') }}">ログイン画面へ戻る</a>
 </div>
 </div>
 </div>

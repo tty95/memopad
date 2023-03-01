@@ -20,22 +20,23 @@
 
 <form class="form-horizontal" method="POST" action="{{ route('memo.update') }}">
 {{ csrf_field() }}
+{{ method_field('PUT') }}
 <div class="form-group">
 <label for="title" class="col-md-4 control-label">タイトル</label>
 <div class="col-md-6">
-<input id="title" type="text" class="form-control" name="title" maxlength="40" placeholder="メモ１" value="{{ old('title', $result->title) }}" required autofocus>
+<input id="title" type="text" class="form-control" name="title" maxlength="40" placeholder="メモ１" value="{{ old('title', $memo->title) }}" required autofocus>
 </div>
 </div>
 <div class="form-group">
 <label for="content" class="col-md-4 control-label">メモ内容</label>
 <div class="col-md-6">
-<textarea id="content" type="text" rows="10" class="form-control" name="content" required autofocus>{{ old('content', $result->content) }}</textarea>
+<textarea id="content" type="text" rows="10" class="form-control" name="content" required autofocus>{{ old('content', $memo->content) }}</textarea>
 </div>
 </div>
 <div class="form-group">
 <label for="id" class="col-md-4 control-label"></label>
 <div class="col-md-6">
-<input id="id" type="hidden" class="form-control" name="id" value="{{ $result->id }}" required autofocus>
+<input id="id" type="hidden" class="form-control" name="id" value="{{ $memo->id }}" required autofocus>
 </div>
 </div>
 <div class="form-group">
