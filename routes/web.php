@@ -24,9 +24,9 @@ Route::get('/login/google/callback', 'GoogleLoginController@authGoogleCallback')
 
 Route::group(['middleware' => ['auth']], function() {
         Route::get('/memopad', 'MemoController@index')->name('memo.index');
-        Route::get('/memopad/add', 'MemoController@add')->name('memo.add');
-        Route::post('/memopad/add', 'MemoController@memoInsert')->name('memo.insert');
-        Route::get('/memopad/edit/{id}', 'MemoController@edit')->name('memo.edit');
+        Route::get('/memopad/add', 'MemoController@showAddMemoPage')->name('memo.add');
+        Route::post('/memopad/add', 'MemoController@add')->name('memo.insert');
+        Route::get('/memopad/edit/{id}', 'MemoController@showEditMemoPage')->name('memo.edit');
         Route::put('/memopad/edit', 'MemoController@update')->name('memo.update');
         Route::delete('/memopad', 'MemoController@delete')->name('memo.delete'); 
 });
