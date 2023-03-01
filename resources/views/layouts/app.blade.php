@@ -11,8 +11,13 @@
 <title>{{ config('app.name', 'Laravel') }}</title>
 
 <!-- Styles -->
+@if(config('app.env') === 'production')
+<link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+<link href="{{ secure_asset('css/background.css') }}" rel="stylesheet">
+@else
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <link href="{{ asset('css/background.css') }}" rel="stylesheet">
+@endif
 
 </head>
 <body>
