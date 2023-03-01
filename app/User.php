@@ -33,18 +33,18 @@ class User extends Authenticatable
                 return $this->where('email', $email)->first();
         }
 
-        public function createUserByGoogle($gUser)
+        public function createUserByGoogle($google_user)
         {
                 $user = User::create([
-                        'name' => $gUser->name,
-                        'email' => $gUser->email,
+                        'name' => $google_user->name,
+                        'email' => $google_user->email,
                         'password' => Hash::make(uniqid()),
                 ]);
                 return $user;
         }
 
-        public function findEmail($gUser)
+        public function findEmail($google_user)
         {
-                return $this->where('email', $gUser->email)->first();
+                return $this->where('email', $google_user->email)->first();
         }
 }

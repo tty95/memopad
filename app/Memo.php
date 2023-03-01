@@ -11,9 +11,9 @@ class Memo extends Model
                 'user_id', 'title', 'content',
         ];
 
-        public function memoSearch($keyword, $auth_id)
+        public function searchMemos($keyword, $auth_id)
         {
-                $search = $this->memoFind($auth_id)
+                $search = $this->findMemos($auth_id)
                         ->where(function($query) use ($keyword){
                                 $query->where('title', 'like', '%' . $keyword . '%')
                                         ->orWhere('content', 'like', '%' . $keyword . '%');
@@ -22,36 +22,36 @@ class Memo extends Model
                 return $result;
         }
 
-        public function memoFind($auth_id)
+        public function findMemos($auth_id)
         {
                 return $this->where('user_id', $auth_id);
         }
 
-        public function insert($user_id, $request)
+        public function addMemo($user_id, $request)
         {
-                $insert = new Memo;
-                $insert->user_id = $user_id;
-                $insert->title = $request->input('title');
-                $insert->content = $request->input('content');
-                if ($insert->save()) {
+                $add = new Memo;
+                $add->user_id = $user_id;
+                $add->title = $request->input('title');
+                $add->content = $request->input('content');
+                if ($add->save()) {
                         return true;
                 }
                 return false;
         }
 
-        public function get($memo_id)
+        public function findMemoToBeEdited($memo_id)
         {
-                $memo = $this->memoIdFind($memo_id);
+                $memo = $this->find($memo_id);
                 if ($memo && $memo->user_id == Auth::id()) {
                         return $memo;
                 }
                 return false;
         }
 
-        public function memoUpdate($request)
+        public function updateMemo($request)
         {
                 $memo_id = $request->input('id');
-                $memo = $this->memoIdFind($memo_id);    
+                $memo = $this->find($memo_id);    
                 if($memo && $memo->user_id == Auth::id()) {
                         $memo->title = $request->input('title');
                         $memo->content = $request->input('content');
@@ -62,20 +62,15 @@ class Memo extends Model
 		return false;
         }
 
-        public function memoDelete($request)
+        public function deleteMemo($request)
         {
                 $memo_id = $request->input('memo_id');
-                $memo = $this->memoIdFind($memo_id);
+                $memo = $this->find($memo_id);
                 if ($memo && $memo->user_id == Auth::id()) {
                         $memo->forceDelete();
                         return true;
                 }
                 return false;
-        }
-
-        public function memoIdFind($memo_id)
-        {
-                return $this->find($memo_id);
         }
 
 
