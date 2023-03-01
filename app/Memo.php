@@ -42,10 +42,8 @@ class Memo extends Model
         public function get($memo_id)
         {
                 $memo = $this->memoIdFind($memo_id);
-                if ($memo) {
-                        if ($memo->user_id == Auth::id()) {
-                                return $memo;
-                        }
+                if ($memo && $memo->user_id == Auth::id()) {
+                        return $memo;
                 }
                 return false;
         }
@@ -54,7 +52,7 @@ class Memo extends Model
         {
                 $memo_id = $request->input('id');
                 $memo = $this->memoIdFind($memo_id);    
-                if($memo) {
+                if($memo && $memo->user_id == Auth::id()) {
                         $memo->title = $request->input('title');
                         $memo->content = $request->input('content');
                         if ($memo->save()) {
@@ -68,7 +66,7 @@ class Memo extends Model
         {
                 $memo_id = $request->input('memo_id');
                 $memo = $this->memoIdFind($memo_id);
-                if ($memo) {
+                if ($memo && $memo->user_id == Auth::id()) {
                         $memo->forceDelete();
                         return true;
                 }
